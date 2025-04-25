@@ -1,0 +1,59 @@
+toloai/
+│
+├── index.html                           # 主页
+│
+├── assets/                              # 资源文件夹
+│   ├── css/                             # CSS 文件夹
+│   │   ├── main.css                     # 主要样式表
+│   │   ├── components.css               # 组件样式表
+│   │   └── dashboard.css                # 仪表盘特定样式
+│   │
+│   ├── js/                              # JavaScript 文件夹
+│   │   ├── main.js                      # 主要脚本文件
+│   │   └── dashboard.js                 # 仪表盘特定脚本
+│   │
+│   └── img/                             # 图片文件夹
+│       ├── favicon.ico                  # 网站图标
+│       └── apple-touch-icon.png         # iOS 设备图标
+│
+├── components/                          # 组件模板文件夹
+│   ├── header.html                      # 导航栏组件
+│   ├── mobile-nav.html                  # 移动导航组件
+│   ├── footer.html                      # 页脚组件
+│   ├── sidebar.html                     # 侧边栏组件
+│   ├── breadcrumb.html                  # 面包屑导航组件
+│   ├── page-header.html                 # 页面标题组件
+│   ├── alert.html                       # 提示框组件
+│   ├── card.html                        # 卡片组件
+│   ├── pagination.html                  # 分页组件
+│   ├── tab.html                         # 标签页组件
+│   ├── modal.html                       # 模态窗口组件
+│   └── toast.html                       # 通知组件
+│
+├── templates/                           # 页面模板文件夹
+│   ├── page-template.html               # 标准页面模板
+│   └── dashboard-template.html          # 仪表盘页面模板
+│
+├── pages/                               # 具体页面文件夹
+│   ├── features.html                    # 功能页面
+│   ├── solutions.html                   # 解决方案页面
+│   ├── pricing.html                     # 价格页面
+│   ├── blog.html                        # 博客页面
+│   ├── contact.html                     # 联系我们页面
+│   ├── about.html                       # 关于我们页面
+│   ├── login.html                       # 登录页面
+│   └── signup.html                      # 注册页面
+│
+└── dashboard/                           # 仪表盘页面文件夹
+    ├── index.html                       # 仪表盘主页
+    ├── analytics.html                   # 分析页面
+    ├── reports.html                     # 报告页面
+    ├── data-sources.html                # 数据源页面
+    ├── data-processing.html             # 数据处理页面
+    ├── visualizations/                  # 可视化页面文件夹
+    │   ├── charts.html                  # 图表页面
+    │   ├── dashboards.html              # 仪表盘页面
+    │   └── reports.html                 # 报告页面
+    ├── user-management.html             # 用户管理页面
+    ├── settings.html                    # 设置页面
+    └── billing.html                     # 账单页面
