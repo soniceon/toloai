@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToloAI - Intelligent Data Analysis Platform</title>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background-color: #3652d9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #2c0882;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(58, 12, 163, 0.3);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.2);
+        }
+        
+        .hero {
+            padding-top: 120px;
+            padding-bottom: 5rem;
+            background-color: white;
+        }
+        
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 2rem;
+        }
+        
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-image img {
+            width: 100%;
+            border-radius: 10px;
+            display: block;
+        }
+        
+        .social-proof {
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .social-proof-text {
+            font-weight: 600;
+            margin-right: 1rem;
+            color: var(--gray);
+        }
+        
+        .social-proof-logos {
+            display: flex;
+            align-items: center;
+        }
+        
+        .social-proof-logos img {
+            height: 30px;
+            margin-right: 1.5rem;
+            opacity: 0.7;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .highlight {
+            color: var(--primary);
+        }
+        
+        .highlight-secondary {
+            color: var(--secondary);
+        }
+        
+        p.lead {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--gray);
+        }
+        
+        .start-now {
+            margin-top: 3rem;
+            padding: 2rem;
+            background-color: var(--light);
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .start-now h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .start-now p {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+        }
+        
+        .features {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .feature-icon.accent {
+            background-color: var(--accent);
+        }
+        
+        .feature-icon.secondary {
+            background-color: var(--secondary);
+        }
+        
+        .feature-icon i {
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .how-it-works {
+            padding: 5rem 0;
+            background-color: var(--light);
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            max-width: 900px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+        
+        .step h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: -50px;
+            width: 100px;
+            height: 2px;
+            background-color: #e1e5eb;
+            display: none;
+        }
+        
+        @media (min-width: 992px) {
+            .step:not(:last-child)::after {
+                display: block;
+            }
+        }
+        
+        .use-cases {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .use-cases-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .use-cases-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .use-cases-content h2 {
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+        }
+        
+        .use-cases-content p {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+        }
+        
+        .use-cases-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .use-cases-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .use-case-features {
+            margin-top: 2rem;
+        }
+        
+        .use-case-feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .use-case-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(67, 97, 238, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .use-case-icon i {
+            color: var(--primary);
+        }
+        
+        .integrations {
+            padding: 5rem 0;
+            background-color: var(--light);
+        }
+        
+        .integrations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .integration-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+        
+        .integration-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .integration-item img {
+            max-width: 80%;
+            max-height: 50px;
+        }
+        
+        .testimonials {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .testimonial-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .testimonial {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .testimonial:last-child {
+            margin-bottom: 0;
+        }
+        
+        .testimonial-text {
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            color: var(--gray);
+            line-height: 1.8;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            overflow: hidden;
+        }
+        
+        .testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .testimonial-info h4 {
+            margin-bottom: 0.3rem;
+        }
+        
+        .testimonial-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .testimonial-quote {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            color: rgba(0, 0, 0, 0.1);
+            font-size: 3rem;
+        }
+        
+        .testimonial-stats {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e1e5eb;
+        }
+        
+        .testimonial-stat {
+            margin-right: 2rem;
+        }
+        
+        .testimonial-stat-value {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .testimonial-stat-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+        
+        .pricing {
+            padding: 5rem 0;
+            background-color: var(--light);
+        }
+        
+        .pricing-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+        
+        .pricing-toggle {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 50px;
+            padding: 0.3rem;
+            margin: 0 auto;
+        }
+        
+        .pricing-toggle-option {
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .pricing-toggle-option.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .pricing-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .pricing-plan {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            flex: 1;
+            min-width: 300px;
+            max-width: 350px;
+            transition: transform 0.3s;
+            border: 1px solid #e1e5eb;
+        }
+        
+        .pricing-plan:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pricing-header {
+            padding: 2rem;
+            background-color: var(--light);
+            text-align: center;
+            border-bottom: 1px solid #e1e5eb;
+        }
+        
+        .pricing-popular {
+            border: 2px solid var(--secondary);
+            position: relative;
+        }
+        
+        .pricing-popular-badge {
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background-color: var(--secondary);
+            color: white;
+            transform: rotate(45deg);
+            padding: 0.3rem 2rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pricing-name {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .pricing-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--gray);
+        }
+        
+        .pricing-description {
+            color: var(--gray);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .pricing-features {
+            padding: 2rem;
+        }
+        
+        .pricing-features ul {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-features ul li {
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .pricing-features ul li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        .pricing-cta {
+            text-align: center;
+            padding-bottom: 2rem;
+        }
+        
+        .pricing-persona {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            font-style: italic;
+            color: var(--gray);
+        }
+        
+        .enterprise {
+            margin-top: 3rem;
+            background-color: var(--dark);
+            padding: 3rem;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+        }
+        
+        .enterprise h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .enterprise p {
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .cta {
+            padding: 5rem 0;
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            background-image: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn-light {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        .btn-light:hover {
+            background-color: var(--light);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 5rem 0 3rem;
+        }
+        
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-col h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-col ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-col ul li a i {
+            margin-right: 0.5rem;
+            font-size: 0.8rem;
+        }
+        
+        .footer-col ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .footer-social {
+            display: flex;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .social-icon i {
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .newsletter {
+            margin-top: 2rem;
+        }
+        
+        .newsletter p {
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+        
+        .newsletter-form {
+            display: flex;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            font-size: 0.9rem;
+        }
+        
+        .newsletter-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 1rem;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .newsletter-button:hover {
+            background-color: #3652d9;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #999;
+        }
+        
+        .language-selector {
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+            color: #999;
+        }
+        
+        .language-selector select {
+            background-color: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.3rem 0.5rem;
+            border-radius: 3px;
+            margin-left: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .language-selector select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .container {
+                width: 95%;
+            }
+            
+            .hero-content, .use-cases-content {
+                padding-right: 0;
+            }
+            
+            .step:not(:last-child)::after {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0.5rem;
+            }
+            
+            .hero {
+                padding-top: 160px;
+            }
+            
+            .hero-container {
+                flex-direction: column;
+            }
+            
+            .hero-content {
+                margin-bottom: 2rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .use-cases-container {
+                flex-direction: column;
+            }
+            
+            .cta h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <div class="logo">Tolo<span>AI</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#use-cases">Use Cases</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#" class="btn btn-primary">Get Started</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1>Unlock Insights with <span class="highlight">AI-Powered</span> Data <span class="highlight-secondary">Analysis</span></h1>
+                <p class="lead">Turn complex data into actionable insights in minutes. ToloAI combines state-of-the-art artificial intelligence with intuitive analytics to revolutionize how businesses understand their data.</p>
+                <div class="social-proof">
+                    <div class="social-proof-text">Trusted by 5,000+ companies</div>
+                    <div class="social-proof-logos">
+                        <img src="/api/placeholder/100/30" alt="Microsoft">
+                        <img src="/api/placeholder/100/30" alt="Adobe">
+                        <img src="/api/placeholder/100/30" alt="Salesforce">
+                    </div>
+                </div>
+                <div class="start-now">
+                    <h3>Get Your First Insight in 60 Seconds</h3>
+                    <p>Upload your data and let our AI generate instant, meaningful insights that drive business decisions.</p>
+                    <a href="#" class="btn btn-primary">Start Free Analysis</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="/api/placeholder/600/400" alt="ToloAI Platform Dashboard">
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Powerful Analytics Tools for Every Data Challenge</h2>
+                <p>ToloAI adapts to your unique data needs, combining advanced machine learning with intuitive data visualization</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Predictive Analytics</h3>
+                    <p>Forecast trends and anticipate future outcomes with our advanced machine learning algorithms</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon secondary">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Natural Language Processing</h3>
+                    <p>Extract valuable insights from text data, reviews, and communication with advanced NLP</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon accent">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Real-time Analysis</h3>
+                    <p>Process and analyze streaming data in real-time to make faster, more informed decisions</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>Interactive Visualizations</h3>
+                    <p>Create stunning, interactive data visualizations that make complex data easy to understand</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon secondary">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Automated Data Cleaning</h3>
+                    <p>Save hours with our AI-powered data cleaning tools that automatically fix common data issues</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon accent">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Secure Collaboration</h3>
+                    <p>Share insights and collaborate with team members while maintaining strict data security protocols</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>Three Simple Steps to Data Mastery</h2>
+                <p>We've simplified the data analysis process so you can focus on insights that matter</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Connect Your Data</h3>
+                    <p>Upload files, connect to databases, or integrate with your existing tools in minutes</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>AI Processing</h3>
+                    <p>Our advanced algorithms clean, analyze, and transform your data automatically</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Visualize & Act</h3>
+                    <p>Explore interactive dashboards, share insights, and make data-driven decisions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="use-cases" class="use-cases">
+        <div class="container use-cases-container">
+            <div class="use-cases-content">
+                <h2>Solutions for Every <span class="highlight">Industry</span></h2>
+                <p>ToloAI adapts to your specific industry challenges with specialized models and analytics designed for your unique data needs.</p>
+                <div class="use-case-features">
+                    <div class="use-case-feature">
+                        <div class="use-case-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div>
+                            <h4>Retail & E-commerce</h4>
+                            <p>Customer segmentation, inventory forecasting, and price optimization</p>
+                        </div>
+                    </div>
+                    <div class="use-case-feature">
+                        <div class="use-case-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div>
+                            <h4>Healthcare</h4>
+                            <p>Patient outcome prediction, resource optimization, and clinical data analysis</p>
+                        </div>
+                    </div>
+                    <div class="use-case-feature">
+                        <div class="use-case-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div>
+                            <h4>Finance</h4>
+                            <p>Fraud detection, risk assessment, and investment performance analysis</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="btn btn-primary" style="margin-top: 2rem;">Explore Industry Solutions</a>
+            </div>
+            <div class="use-cases-image">
+                <img src="/api/placeholder/500/400" alt="Industry Solutions">
+            </div>
+        </div>
+    </section>
+
+    <section class="integrations">
+        <div class="container">
+            <div class="section-title">
+                <h2>Seamless Integrations</h2>
+                <p>Connect with your favorite tools and platforms for a unified data experience</p>
+            </div>
+            <div class="integrations-grid">
+                <div class="integration-item">
+                    <img src="/api/placeholder/80/40" alt="Salesforce">
+                </div>
+                <div class="integration-item">
+                    <img src="/api/placeholder/80/40" alt="AWS">
+                </div>
+                <div class="integration-item">
+                    <img src="/api/placeholder/80/40" alt="Google Cloud">
+                </div>
+                <div class="integration-item">
+                    <img src="/api/placeholder/80/40" alt="Slack">
+                </div>
+                <div class="integration-item">
+                    <img src="/api/placeholder/80/40" alt="Microsoft">
+                </div>
+                <div class="integration-item">
+                    <img src="/api/placeholder/80/40" alt="Tableau">
+                </div>
+                <div class="integration-item">
+                    <img src="/api/placeholder/80/40" alt="Zapier">
+                </div>
+                <div class="integration-item">
+                    <img src="/api/placeholder/80/40" alt="Hubspot">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Success Stories</h2>
+                <p>See how organizations are transforming their data strategy with ToloAI</p>
+            </div>
+            <div class="testimonial-container">
+                <div class="testimonial">
+                    <div class="testimonial-quote">
+                        <i class="fas fa-quote-right"></i>
+                    </div>
+                    <div class="testimonial-text">
+                        <p>ToloAI has completely transformed how we approach data analysis. Before, our team spent hours cleaning data and building reports. Now, the AI handles the heavy lifting, and we can focus on strategic decisions. The predictive analytics feature has been particularly valuable—we've increased our forecast accuracy by 35% and can better anticipate market shifts.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="/api/placeholder/60/60" alt="Alex Thompson">
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Alex Thompson</h4>
+                            <p>Data Science Director, Global Retail Inc.</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-stats">
+                        <div class="testimonial-stat">
+                            <div class="testimonial-stat-value">68%</div>
+                            <div class="testimonial-stat-label">Reduction in analysis time</div>
+                        </div>
+                        <div class="testimonial-stat">
+                            <div class="testimonial-stat-value">35%</div>
+                            <div class="testimonial-stat-label">Improved forecast accuracy</div>
+                        </div>
+                        <div class="testimonial-stat">
+                            <div class="testimonial-stat-value">$2.4M</div>
+                            <div class="testimonial-stat-label">Additional revenue generated</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-quote">
+                        <i class="fas fa-quote-right"></i>
+                    </div>
+                    <div class="testimonial-text">
+                        <p>As a healthcare provider managing vast amounts of patient data, we needed a solution that was both powerful and secure. ToloAI exceeded our expectations. The platform's ability to identify patterns in patient outcomes has directly contributed to improved care protocols. Implementation was smooth, and the support team has been exceptional in helping us adapt the system to our specific needs.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="/api/placeholder/60/60" alt="Dr. Sarah Chen">
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Dr. Sarah Chen</h4>
+                            <p>Chief Medical Information Officer, Metropolitan Health</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-stats">
+                        <div class="testimonial-stat">
+                            <div class="testimonial-stat-value">22%</div>
+                            <div class="testimonial-stat-label">Reduction in readmission rates</div>
+                        </div>
+                        <div class="testimonial-stat">
+                            <div class="testimonial-stat-value">45%</div>
+                            <div class="testimonial-stat-label">Faster insights from clinical data</div>
+                        </div>
+                        <div class="testimonial-stat">
+                            <div class="testimonial-stat-value">12,000+</div>
+                            <div class="testimonial-stat-label">Patient records analyzed daily</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Flexible Plans for Every Organization</h2>
+                <p>Choose the plan that fits your data needs and scale as your requirements grow</p>
+            </div>
+            <div class="pricing-tabs">
+                <div class="pricing-toggle">
+                    <div class="pricing-toggle-option active">Monthly</div>
+                    <div class="pricing-toggle-option">Annual (20% off)</div>
+                </div>
+            </div>
+            <div class="pricing-container">
+                <div class="pricing-plan">
+                    <div class="pricing-header">
+                        <div class="pricing-name">Starter</div>
+                        <div class="pricing-price">$49<span>/month</span></div>
+                        <div class="pricing-description">Perfect for small businesses and startups</div>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li>5GB data processing</li>
+                            <li>3 data sources</li>
+                            <li>Basic analytics models</li>
+                            <li>Standard visualizations</li>
+                            <li>Weekly data refresh</li>
+                            <li>Email support</li>
+                            <li>2 user accounts</li>
+                        </ul>
+                        <div class="pricing-cta">
+                            <a href="#" class="btn btn-primary">Start Free Trial</a>
+                            <div class="pricing-persona">Ideal for teams starting with data analytics</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pricing-plan pricing-popular">
+                    <div class="pricing-popular-badge">Most Popular</div>
+                    <div class="pricing-header">
+                        <div class="pricing-name">Professional</div>
+                        <div class="pricing-price">$149<span>/month</span></div>
+                        <div class="pricing-description">For growing teams with advanced needs</div>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li>25GB data processing</li>
+                            <li>10 data sources</li>
+                            <li>Advanced analytics models</li>
+                            <li>Interactive dashboards</li>
+                            <li>Daily data refresh</li>
+                            <li>Priority support</li>
+                            <li>Custom visualizations</li>
+                            <li>10 user accounts</li>
+                            <li>API access</li>
+                        </ul>
+                        <div class="pricing-cta">
+                            <a href="#" class="btn btn-secondary">Start Free Trial</a>
+                            <div class="pricing-persona">Perfect for data-driven departments</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pricing-plan">
+                    <div class="pricing-header">
+                        <div class="pricing-name">Enterprise</div>
+                        <div class="pricing-price">$499<span>/month</span></div>
+                        <div class="pricing-description">For organizations with complex data needs</div>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li>Unlimited data processing</li>
+                            <li>Unlimited data sources</li>
+                            <li>Custom AI models</li>
+                            <li>Real-time analytics</li>
+                            <li>Advanced security features</li>
+                            <li>Dedicated account manager</li>
+                            <li>24/7 priority support</li>
+                            <li>Unlimited users</li>
+                            <li>Full API access</li>
+                            <li>Custom integrations</li>
+                        </ul>
+                        <div class="pricing-cta">
+                            <a href="#" class="btn btn-primary">Contact Sales</a>
+                            <div class="pricing-persona">Ideal for enterprise-wide data transformation</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="enterprise">
+                <h3>Need a Custom Solution?</h3>
+                <p>Our team can create a tailored package for organizations with specialized data requirements or industry-specific needs.</p>
+                <a href="#" class="btn btn-light">Schedule a Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2>Transform Your Data into Action Today</h2>
+            <p>Join thousands of organizations that are revolutionizing how they leverage data with AI-powered analytics tools.</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-light">Start Free Trial</a>
+                <a href="#" class="btn btn-outline">Request Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4>ToloAI</h4>
+                    <p style="color: #ddd; margin-bottom: 1.5rem;">Transform your data analysis with AI-powered tools that deliver actionable insights and drive business growth through intelligent automation.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Features</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Pricing</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Case Studies</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Documentation</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> API</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Solutions</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> For Finance</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> For Healthcare</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> For Retail</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> For Manufacturing</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> For Marketing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Careers</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Blog</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Press</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                    <div class="language-selector">
+                        <span>Language:</span>
+                        <select>
+                            <option value="en">English</option>
+                            <option value="fr">Français</option>
+                            <option value="de">Deutsch</option>
+                            <option value="es">Español</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Stay Updated</h4>
+                    <p>Subscribe to our newsletter for data insights, product updates, and exclusive tips.</p>
+                    <div class="newsletter">
+                        <form class="newsletter-form">
+                            <input type="email" class="newsletter-input" placeholder="Your email address">
+                            <button type="submit" class="newsletter-button">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <p style="margin-top: 1rem; font-size: 0.8rem; color: #999;">By subscribing, you agree to our Privacy Policy and consent to receive updates from ToloAI.</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 ToloAI. All rights reserved. <a href="#" style="color: #999; text-decoration: none;">Privacy Policy</a> | <a href="#" style="color: #999; text-decoration: none;">Terms of Service</a> | <a href="#" style="color: #999; text-decoration: none;">GDPR</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dynamic header behavior
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Pricing toggle
+        const pricingOptions = document.querySelectorAll('.pricing-toggle-option');
+        pricingOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                pricingOptions.forEach(o => o.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
